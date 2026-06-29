@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import PlumbobLogo from "./PlumbobLogo";
 import { packs } from "@/lib/packs";
 import { useHydrated, useStore } from "@/lib/store";
 
@@ -71,8 +71,18 @@ export default function Header() {
       <div className="wrap">
         <div className="header-bar">
           <Link href="/" aria-label="Mrs Plumbob Challenges — home" className="brand">
-            <PlumbobLogo />
-            MrsPlumbobChallenges <span style={{ fontSize: 15 }}>💖</span>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={38}
+              height={38}
+              className="brand-logo"
+              priority
+            />
+            <span className="brand-word">
+              <span className="brand-pink">Mrs Plumbob</span>{" "}
+              <span className="brand-lav">Challenges</span>
+            </span>
           </Link>
 
           <nav className="nav-desktop" aria-label="Primary">

@@ -18,6 +18,9 @@
   --shadow: rgba(244, 73, 154, 0.16);
   --locked: #ff8f6b;
   --locked-soft: #ffe2d6;
+  /* Heading / brand two-tone (matches cover.png) */
+  --brand-pink: #ff4fa8;
+  --brand-lav: #a77be6;
 }
 
 * {
@@ -107,16 +110,26 @@ a:hover {
 .brand {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   font-family: var(--font-fredoka);
   font-weight: 700;
   font-size: 20px;
-  color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
 }
 .brand:hover {
   text-decoration: none;
+}
+.brand-logo {
+  border-radius: 10px;
+  flex: none;
+  display: block;
+}
+.brand-word .brand-pink {
+  color: var(--brand-pink);
+}
+.brand-word .brand-lav {
+  color: var(--brand-lav);
 }
 .nav-desktop {
   display: flex;
@@ -235,11 +248,11 @@ a:hover {
 /* ---------------- headings / text ---------------- */
 .eyebrow {
   font-family: var(--font-fredoka);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--lav);
+  color: var(--brand-lav);
   margin: 0 0 8px;
 }
 h1.page {
@@ -247,7 +260,7 @@ h1.page {
   font-weight: 700;
   font-size: 32px;
   margin: 0 0 6px;
-  color: var(--ink);
+  color: var(--brand-pink);
   letter-spacing: -0.3px;
 }
 h1.page.big {
@@ -255,7 +268,7 @@ h1.page.big {
   line-height: 1.02;
 }
 .gradtext {
-  background: linear-gradient(120deg, var(--pink-deep), var(--lav) 60%, var(--peach));
+  background: linear-gradient(120deg, var(--brand-pink), var(--brand-lav) 75%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -676,7 +689,7 @@ button.card:hover {
   font-weight: 700;
   font-size: 16px;
   margin: 0 0 12px;
-  color: var(--pink-deep);
+  color: var(--brand-pink);
 }
 .block ul {
   margin: 0;

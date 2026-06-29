@@ -22,9 +22,9 @@ export default function PackGrid() {
           <h2
             style={{
               fontFamily: "var(--font-fredoka)",
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: 14,
-              color: "var(--lav)",
+              color: "var(--brand-lav)",
               margin: "24px 0 11px",
             }}
           >
