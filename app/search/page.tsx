@@ -37,7 +37,10 @@ export default function SearchPage() {
       </div>
 
       {query ? (
-        <ChallengeGrid challenges={list} empty={<>No challenges match “{q}”. Try another word. 💝</>} />
+        <>
+          <h2 className="sr-only">Search results</h2>
+          <ChallengeGrid challenges={list} empty={<>No challenges match “{q}”. Try another word. 💝</>} />
+        </>
       ) : (
         <div className="empty">Type something above to search the library. ✨</div>
       )}

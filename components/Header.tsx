@@ -103,8 +103,14 @@ export default function Header() {
               className="pill"
               style={{ marginLeft: 6, textDecoration: "none" }}
               title="Packs you own"
+              aria-label={
+                hydrated && packsSet
+                  ? `My packs: ${ownedCount} of ${total} owned`
+                  : "Set the packs you own"
+              }
             >
-              🎀 {hydrated && packsSet ? `${ownedCount} of ${total}` : `Set your`} packs
+              <span aria-hidden="true">🎀</span>{" "}
+              {hydrated && packsSet ? `${ownedCount} of ${total}` : `Set your`} packs
             </Link>
           </nav>
         </div>

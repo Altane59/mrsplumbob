@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { challenges, categories, getChallengeById } from "@/lib/challenges";
 import { getDailyChallenge } from "@/lib/daily";
-import { isPlayable, missingPacks } from "@/lib/playability";
-import { packName } from "@/lib/packs";
+import { isPlayable } from "@/lib/playability";
 import { useHydrated, useOwnedSet, useStore } from "@/lib/store";
 import ChallengeGrid from "@/components/ChallengeGrid";
 import ChallengeCard from "@/components/ChallengeCard";
-import DifficultyMeter from "@/components/DifficultyMeter";
 import type { ChallengeWithSlug } from "@/lib/types";
 
 export default function HomePage() {
@@ -18,7 +16,8 @@ export default function HomePage() {
   const packsSet = useStore((s) => s.packsSet);
   const progress = useStore((s) => s.progress);
 
-  // Daily pick is date-dependent — compute after mount to reflect "today".
+  // Daily pick is date-dependent — compute after mount to reflect "today"
+  // (deterministic per calendar day, see lib/daily.ts).
   const [daily, setDaily] = useState<ChallengeWithSlug | null>(null);
   useEffect(() => setDaily(getDailyChallenge(new Date())), []);
 
@@ -41,16 +40,18 @@ export default function HomePage() {
           <span className="gradtext">challenge.</span>
         </h1>
         <p className="sub">
-          Every Sims 4 challenge, written clearly and filtered to the packs you
-          actually own. Follow rules that are sweet and clear, track your milestones,
-          and let Mrs Plumbob hand you something to play.{" "}
+          <strong style={{ color: "var(--ink)" }}>
+            {challenges.length} challenges
+          </strong>
+          , filtered to the packs you actually own — each written clearly, with
+          milestones to track.{" "}
           {hydrated && packsSet
-            ? `${playableCount} of ${challenges.length} challenges are ready for your packs right now! 💕`
+            ? `${playableCount} are ready for your packs right now! 💕`
             : "💕"}
         </p>
         <div className="btn-row">
           <Link className="big-btn" href="/surprise">
-            🎲 Surprise Me
+            <span aria-hidden="true">🎲 </span>Surprise Me
           </Link>
           <Link className="ghost-btn" href="/browse">
             Browse all challenges
@@ -61,9 +62,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {hydrated && !packsSet && (
+        <div className="nudge" style={{ marginTop: 4 }}>
+          👋 New here? Tell us which packs you own and we&apos;ll show exactly which
+          challenges you can play. <Link href="/packs">Set your packs →</Link>
+        </div>
+      )}
+
       {inProgress.length > 0 && (
         <section className="section" style={{ paddingTop: 0 }}>
-          <p className="eyebrow">💗 Continue where you left off</p>
+          <h2 className="eyebrow">💗 Continue where you left off</h2>
           <div className="grid">
             {inProgress.map((c) => (
               <ChallengeCard key={c.id} challenge={c} />
@@ -73,55 +81,25 @@ export default function HomePage() {
       )}
 
       <section className="section" style={{ paddingTop: inProgress.length ? 0 : undefined }}>
-        <p className="eyebrow">🌟 Daily Challenge</p>
-        {daily ? (
-          <Link
-            href={`/challenge/${daily.slug}`}
-            className="block"
-            style={{ display: "block", textDecoration: "none" }}
-          >
-            <span className="cat" style={{ color: "var(--lav)" }}>
-              {daily.category} · Today&apos;s pick
-            </span>
-            <h3
-              style={{
-                fontFamily: "var(--font-fredoka)",
-                fontSize: 24,
-                margin: "6px 0 8px",
-                color: "var(--ink)",
-              }}
-            >
-              {daily.title}
-            </h3>
-            <p style={{ color: "var(--muted)", margin: "0 0 12px", fontWeight: 500 }}>
-              {daily.premise}
-            </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-              <DifficultyMeter
-                difficulty={daily.difficulty}
-                label={daily.difficultyLabel}
-                showLabel
-              />
-              <span className="pill">{daily.length}</span>
-              {hydrated && packsSet ? (
-                isPlayable(daily, owned) ? (
-                  <span className="badge play">✨ Playable</span>
-                ) : (
-                  <span className="badge lock">
-                    🔒 Needs: {missingPacks(daily, owned).map(packName).join(", ")}
-                  </span>
-                )
-              ) : null}
+        <h2 className="eyebrow">🌟 Daily Challenge</h2>
+        <p className="sub" style={{ marginBottom: 16 }}>
+          One hand-picked challenge a day — the same for everyone, fresh tomorrow.
+        </p>
+        <div className="grid">
+          {hydrated && daily ? (
+            <ChallengeCard challenge={daily} />
+          ) : (
+            <div className="card" aria-hidden="true" style={{ opacity: 0.5 }}>
+              <span className="cat">Today&apos;s pick</span>
+              <p className="prem">Loading today&apos;s challenge…</p>
             </div>
-          </Link>
-        ) : (
-          <div className="block" aria-hidden="true" style={{ minHeight: 120 }} />
-        )}
+          )}
+        </div>
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>
-        <p className="eyebrow">🎀 Browse by category</p>
-        <div className="tiles">
+        <h2 className="eyebrow">🎀 Browse by category</h2>
+        <nav aria-label="Browse challenges by category" className="tiles">
           {categories.map((cat) => (
             <Link
               key={cat}
@@ -131,11 +109,11 @@ export default function HomePage() {
               {cat}
             </Link>
           ))}
-        </div>
+        </nav>
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>
-        <p className="eyebrow">💖 A taste of the library</p>
+        <h2 className="eyebrow">💖 A taste of the library</h2>
         <ChallengeGrid challenges={challenges.slice(0, 6)} />
       </section>
     </>

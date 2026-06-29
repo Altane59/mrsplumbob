@@ -6,6 +6,7 @@ import { challenges, categories, lengths, DIFFICULTY_NAME } from "@/lib/challeng
 import { isPlayable } from "@/lib/playability";
 import { useHydrated, useOwnedSet, useStore } from "@/lib/store";
 import ChallengeGrid from "@/components/ChallengeGrid";
+import DifficultyLegend from "@/components/DifficultyLegend";
 
 export default function BrowseClient() {
   const params = useSearchParams();
@@ -102,6 +103,9 @@ export default function BrowseClient() {
         <span className="count">{list.length} shown 🎀</span>
       </div>
 
+      <DifficultyLegend />
+
+      <h2 className="sr-only">Challenges</h2>
       <ChallengeGrid
         challenges={list}
         empty={

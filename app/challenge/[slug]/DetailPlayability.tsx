@@ -48,7 +48,7 @@ export function PacksBlock({ challenge }: { challenge: Challenge }) {
 
   return (
     <div className="block">
-      <h4>🎀 Packs required</h4>
+      <h2>🎀 Packs required</h2>
       <div>
         {baseOnly ? (
           <span className="packtag owned">✓ Base game only</span>
@@ -66,7 +66,7 @@ export function PacksBlock({ challenge }: { challenge: Challenge }) {
         )}
       </div>
 
-      <h4 style={{ marginTop: 16 }}>Packs recommended</h4>
+      <h3 style={{ marginTop: 16 }}>Packs recommended</h3>
       <div>
         {challenge.packsRecommended.length > 0 ? (
           challenge.packsRecommended.map((p) => (

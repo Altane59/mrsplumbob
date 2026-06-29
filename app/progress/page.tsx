@@ -63,9 +63,9 @@ export default function MyChallengesPage() {
 
       {inProgress.length > 0 && (
         <>
-          <p className="eyebrow" style={{ marginTop: 18 }}>
+          <h2 className="eyebrow" style={{ marginTop: 18 }}>
             In progress
-          </p>
+          </h2>
           {inProgress.map((r) => (
             <ChallengeTracker key={r.c.id} row={r} />
           ))}
@@ -74,9 +74,9 @@ export default function MyChallengesPage() {
 
       {completed.length > 0 && (
         <>
-          <p className="eyebrow" style={{ marginTop: 32 }}>
+          <h2 className="eyebrow" style={{ marginTop: 32 }}>
             🎉 Completed
-          </p>
+          </h2>
           {completed.map((r) => (
             <ChallengeTracker key={r.c.id} row={r} />
           ))}
@@ -125,6 +125,7 @@ function ChallengeTracker({ row }: { row: Row }) {
         items={c.milestones}
         kind="milestones"
         title="💕 Milestones — track your progress"
+        headingLevel={4}
       />
 
       {hasObjectives && (
@@ -133,6 +134,7 @@ function ChallengeTracker({ row }: { row: Row }) {
           items={c.objectives as string[]}
           kind="objectives"
           title="🎯 Objectives — complete the checklist"
+          headingLevel={4}
         />
       )}
 

@@ -19,7 +19,7 @@ export default function PackGrid() {
     <div>
       {types.map((type) => (
         <div key={type}>
-          <h4
+          <h2
             style={{
               fontFamily: "var(--font-fredoka)",
               fontWeight: 600,
@@ -29,7 +29,7 @@ export default function PackGrid() {
             }}
           >
             {type}
-          </h4>
+          </h2>
           <div className="packgrid">
             {groups[type].map((p) => {
               const base = p.id === BASE_PACK_ID;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { challenges, getChallengeBySlug, difficultyName } from "@/lib/challenges";
 import DifficultyMeter from "@/components/DifficultyMeter";
+import DifficultyLegend from "@/components/DifficultyLegend";
 import MilestoneTracker from "@/components/MilestoneTracker";
 import { PlayabilityBanner, PacksBlock } from "./DetailPlayability";
 import StartChallengeButton from "./StartChallengeButton";
@@ -91,21 +92,23 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
         )}
       </div>
 
+      <DifficultyLegend />
+
       {c.backstory && (
         <div className="block">
-          <h4>📖 The story</h4>
+          <h2>📖 The story</h2>
           <p style={{ margin: 0 }}>{c.backstory}</p>
         </div>
       )}
 
       <div className="block">
-        <h4>💝 The goal</h4>
+        <h2>💝 The goal</h2>
         <p style={{ margin: 0 }}>{c.goal}</p>
       </div>
 
       {c.failConditions && (
         <div className="block">
-          <h4>🚫 Fail conditions</h4>
+          <h2>🚫 Fail conditions</h2>
           <p style={{ margin: 0 }}>{c.failConditions}</p>
         </div>
       )}
@@ -113,7 +116,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
       <PacksBlock challenge={c} />
 
       <div className="block">
-        <h4>🏡 Setup</h4>
+        <h2>🏡 Setup</h2>
         {c.setup.map((s, i) => (
           <div className="setup-line" key={i}>
             <span className="k">{s.label}</span>
@@ -124,7 +127,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.gettingStarted && c.gettingStarted.length > 0 && (
         <div className="block">
-          <h4>🚀 Getting started</h4>
+          <h2>🚀 Getting started</h2>
           <ul>
             {c.gettingStarted.map((r, i) => (
               <li key={i}>{r}</li>
@@ -135,7 +138,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.cheats && c.cheats.length > 0 && (
         <div className="block">
-          <h4>⌨️ Cheats to type</h4>
+          <h2>⌨️ Cheats to type</h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {c.cheats.map((cheat, i) => (
               <code
@@ -160,7 +163,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.generalRules.length > 0 && (
         <div className="block">
-          <h4>📋 General rules</h4>
+          <h2>📋 General rules</h2>
           <ul>
             {c.generalRules.map((r, i) => (
               <li key={i}>{r}</li>
@@ -171,7 +174,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.specificRules.length > 0 && (
         <div className="block">
-          <h4>✨ Specific rules</h4>
+          <h2>✨ Specific rules</h2>
           <ul>
             {c.specificRules.map((r, i) => (
               <li key={i}>{r}</li>
@@ -182,7 +185,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.allowed && c.allowed.length > 0 && (
         <div className="block">
-          <h4>✅ What you can do</h4>
+          <h2>✅ What you can do</h2>
           <ul>
             {c.allowed.map((r, i) => (
               <li key={i}>{r}</li>
@@ -193,7 +196,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.notAllowed && c.notAllowed.length > 0 && (
         <div className="block">
-          <h4>⛔ What you can&apos;t do</h4>
+          <h2>⛔ What you can&apos;t do</h2>
           <ul>
             {c.notAllowed.map((r, i) => (
               <li key={i}>{r}</li>
@@ -216,14 +219,14 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
           className="block"
           style={{ background: "linear-gradient(135deg,#fff5fb,#f3ecff)" }}
         >
-          <h4>🎮 If you don&apos;t own the packs</h4>
+          <h2>🎮 If you don&apos;t own the packs</h2>
           <p style={{ margin: 0 }}>{c.baseGameVersion}</p>
         </div>
       )}
 
       {c.generationLadder && c.generationLadder.length > 0 && (
         <div className="block">
-          <h4>👑 Generation ladder</h4>
+          <h2>👑 Generation ladder</h2>
           <div style={{ overflowX: "auto" }}>
             <table className="ladder">
               <thead>
@@ -253,7 +256,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.strategyTips && c.strategyTips.length > 0 && (
         <div className="block">
-          <h4>💡 Strategy tips</h4>
+          <h2>💡 Strategy tips</h2>
           <ul>
             {c.strategyTips.map((r, i) => (
               <li key={i}>{r}</li>
@@ -271,7 +274,7 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.wantItHarder.length > 0 && (
         <div className="block">
-          <h4>🔥 Want it harder?</h4>
+          <h2>🔥 Want it harder?</h2>
           <ul>
             {c.wantItHarder.map((r, i) => (
               <li key={i}>{r}</li>
@@ -282,14 +285,14 @@ export default function ChallengeDetailPage({ params }: { params: { slug: string
 
       {c.scoring && (
         <div className="block">
-          <h4>🏆 Scoring</h4>
+          <h2>🏆 Scoring</h2>
           <p style={{ margin: 0 }}>{c.scoring}</p>
         </div>
       )}
 
       {variationsContent(c.variations) && (
         <div className="block">
-          <h4>🎭 Variations</h4>
+          <h2>🎭 Variations</h2>
           {Array.isArray(c.variations) ? (
             <ul>
               {c.variations.map((r, i) => (

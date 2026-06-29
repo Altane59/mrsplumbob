@@ -10,7 +10,11 @@ export default function ChallengeCard({ challenge }: { challenge: ChallengeWithS
       <h3>{challenge.title}</h3>
       <p className="prem">{challenge.premise}</p>
       <div className="row">
-        <DifficultyMeter difficulty={challenge.difficulty} label={challenge.difficultyLabel} />
+        <DifficultyMeter
+          difficulty={challenge.difficulty}
+          label={challenge.difficultyLabel}
+          showLabel
+        />
         <PlayabilityBadge challenge={challenge} />
       </div>
     </Link>

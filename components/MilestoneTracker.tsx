@@ -28,11 +28,14 @@ export default function MilestoneTracker({
   items,
   kind = "milestones",
   title,
+  headingLevel = 2,
 }: {
   challengeId: string;
   items: string[];
   kind?: Kind;
   title?: string;
+  /** Heading level for correct document outline (2 on detail, 4 under a card). */
+  headingLevel?: 2 | 3 | 4;
 }) {
   const hydrated = useHydrated();
   // Both selectors run unconditionally (hooks rule); we pick by `kind`.
@@ -51,9 +54,11 @@ export default function MilestoneTracker({
   const done = new Set(hydrated ? completed ?? [] : []);
   const pct = items.length === 0 ? 0 : Math.round((done.size / items.length) * 100);
 
+  const Heading = `h${headingLevel}` as "h2" | "h3" | "h4";
+
   return (
     <div className="block">
-      <h4>{heading}</h4>
+      <Heading>{heading}</Heading>
 
       <div
         className="progressbar"

@@ -16,7 +16,9 @@ export default function PlayabilityBadge({ challenge }: { challenge: Challenge }
 
   // Until hydrated, or while packs are unknown, stay neutral.
   if (!hydrated || !packsSet) {
-    return <span className="badge neutral">✦ Set packs to check</span>;
+    return (
+      <span className="badge neutral">✦ Set your packs to see if you can play</span>
+    );
   }
 
   if (isPlayable(challenge, owned)) {

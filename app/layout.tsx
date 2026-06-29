@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConsentBanner from "@/components/ConsentBanner";
+import { SITE_URL } from "@/lib/config";
 
 const fredoka = Fredoka({
   subsets: ["latin"],
@@ -19,19 +20,28 @@ const quicksand = Quicksand({
   display: "swap",
 });
 
+const SITE_DESCRIPTION =
+  "Every Sims 4 challenge, written clearly and filtered to the packs you actually own.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mrsplumbobchallenges.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Mrs Plumbob Challenges — Sims 4 challenges, filtered to your packs",
     template: "%s · Mrs Plumbob Challenges",
   },
-  description:
-    "Every Sims 4 challenge, written clearly and filtered to the packs you actually own.",
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Mrs Plumbob Challenges",
-    description:
-      "Every Sims 4 challenge, written clearly and filtered to the packs you actually own.",
+    description: SITE_DESCRIPTION,
     type: "website",
+    url: SITE_URL,
+    siteName: "Mrs Plumbob Challenges",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mrs Plumbob Challenges",
+    description: SITE_DESCRIPTION,
   },
 };
 
