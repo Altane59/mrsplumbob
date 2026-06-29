@@ -1,0 +1,197 @@
+[
+  {
+    "id": "base",
+    "name": "Base Game",
+    "type": "Base"
+  },
+  {
+    "id": "gtw",
+    "name": "Get to Work",
+    "type": "Expansion"
+  },
+  {
+    "id": "gt",
+    "name": "Get Together",
+    "type": "Expansion"
+  },
+  {
+    "id": "cl",
+    "name": "City Living",
+    "type": "Expansion"
+  },
+  {
+    "id": "cd",
+    "name": "Cats & Dogs",
+    "type": "Expansion"
+  },
+  {
+    "id": "sea",
+    "name": "Seasons",
+    "type": "Expansion"
+  },
+  {
+    "id": "gf",
+    "name": "Get Famous",
+    "type": "Expansion"
+  },
+  {
+    "id": "il",
+    "name": "Island Living",
+    "type": "Expansion"
+  },
+  {
+    "id": "uni",
+    "name": "Discover University",
+    "type": "Expansion"
+  },
+  {
+    "id": "eco",
+    "name": "Eco Lifestyle",
+    "type": "Expansion"
+  },
+  {
+    "id": "snow",
+    "name": "Snowy Escape",
+    "type": "Expansion"
+  },
+  {
+    "id": "cot",
+    "name": "Cottage Living",
+    "type": "Expansion"
+  },
+  {
+    "id": "hsy",
+    "name": "High School Years",
+    "type": "Expansion"
+  },
+  {
+    "id": "grow",
+    "name": "Growing Together",
+    "type": "Expansion"
+  },
+  {
+    "id": "hr",
+    "name": "Horse Ranch",
+    "type": "Expansion"
+  },
+  {
+    "id": "rent",
+    "name": "For Rent",
+    "type": "Expansion"
+  },
+  {
+    "id": "love",
+    "name": "Lovestruck",
+    "type": "Expansion"
+  },
+  {
+    "id": "ld",
+    "name": "Life & Death",
+    "type": "Expansion"
+  },
+  {
+    "id": "bh",
+    "name": "Businesses & Hobbies",
+    "type": "Expansion"
+  },
+  {
+    "id": "royal",
+    "name": "Royalty & Legacy",
+    "type": "Expansion"
+  },
+  {
+    "id": "out",
+    "name": "Outdoor Retreat",
+    "type": "Game Pack"
+  },
+  {
+    "id": "spa",
+    "name": "Spa Day",
+    "type": "Game Pack"
+  },
+  {
+    "id": "dine",
+    "name": "Dine Out",
+    "type": "Game Pack"
+  },
+  {
+    "id": "vamp",
+    "name": "Vampires",
+    "type": "Game Pack"
+  },
+  {
+    "id": "parent",
+    "name": "Parenthood",
+    "type": "Game Pack"
+  },
+  {
+    "id": "jungle",
+    "name": "Jungle Adventure",
+    "type": "Game Pack"
+  },
+  {
+    "id": "strange",
+    "name": "StrangerVille",
+    "type": "Game Pack"
+  },
+  {
+    "id": "rom",
+    "name": "Realm of Magic",
+    "type": "Game Pack"
+  },
+  {
+    "id": "batuu",
+    "name": "Journey to Batuu",
+    "type": "Game Pack"
+  },
+  {
+    "id": "dhd",
+    "name": "Dream Home Decorator",
+    "type": "Game Pack"
+  },
+  {
+    "id": "wed",
+    "name": "My Wedding Stories",
+    "type": "Game Pack"
+  },
+  {
+    "id": "wolf",
+    "name": "Werewolves",
+    "type": "Game Pack"
+  },
+  {
+    "id": "tiny",
+    "name": "Tiny Living",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "laundry",
+    "name": "Laundry Day",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "para",
+    "name": "Paranormal Stuff",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "chef_p",
+    "name": "Home Chef Hustle",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "movie",
+    "name": "Movie Hangout Stuff",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "fit",
+    "name": "Fitness Stuff",
+    "type": "Stuff Pack"
+  },
+  {
+    "id": "spooky",
+    "name": "Spooky Stuff",
+    "type": "Stuff Pack"
+  }
+]

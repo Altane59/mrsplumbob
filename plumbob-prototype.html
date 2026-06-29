@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sir Plumbob Challenges 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff2f8;
+    --cream:#fffafd;
+    --pink:#ff74b3;
+    --pink-deep:#f4499a;
+    --pink-soft:#ffd9ec;
+    --lav:#b07cff;
+    --lav-soft:#ecdcff;
+    --peach:#ffb38a;
+    --butter:#ffe08a;
+    --mint:#46d7a8;
+    --plumbob:#3ed27e;
+    --ink:#6a2c54;
+    --muted:#b06d96;
+    --muted2:#c98fb4;
+    --line:#ffd6e9;
+    --card:#ffffff;
+    --shadow:rgba(244,73,154,.16);
+    --locked:#ff8f6b;
+    --locked-soft:#ffe2d6;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);
+    font-family:'Quicksand',system-ui,sans-serif;font-weight:500;line-height:1.55;min-height:100vh;
+    background:
+      radial-gradient(900px 600px at 100% -5%, #ffe1f0 0%, transparent 55%),
+      radial-gradient(820px 560px at -5% 8%, #ece0ff 0%, transparent 55%),
+      radial-gradient(700px 600px at 50% 115%, #ffe6d6 0%, transparent 55%),
+      var(--bg);
+  }
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid var(--pink);outline-offset:2px;border-radius:10px}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header.top{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);
+    background:linear-gradient(180deg, rgba(255,242,248,.95), rgba(255,242,248,.72));
+    border-bottom:2px solid var(--line)}
+  .topbar{display:flex;align-items:center;gap:18px;height:68px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:'Fredoka';font-weight:700;font-size:20px;
+    color:var(--ink);background:none;border:0;cursor:pointer}
+  .brand .mark{filter:drop-shadow(0 3px 6px rgba(62,210,126,.45))}
+  nav.main{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  nav.main button{background:none;border:0;color:var(--muted);font-weight:600;font-size:15px;
+    padding:9px 16px;border-radius:999px;transition:.15s}
+  nav.main button:hover{color:var(--pink-deep);background:var(--pink-soft)}
+  nav.main button.active{color:#fff;background:linear-gradient(135deg,var(--pink),var(--lav));box-shadow:0 6px 16px -6px var(--shadow)}
+
+  .eyebrow{font-family:'Fredoka';font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--lav);margin:0 0 8px}
+  h1.page{font-family:'Fredoka';font-weight:700;font-size:32px;margin:0 0 6px;color:var(--ink);letter-spacing:-.3px}
+  h1.page.big{font-size:clamp(38px,7vw,64px);line-height:1.02}
+  .gradtext{background:linear-gradient(120deg,var(--pink-deep),var(--lav) 60%,var(--peach));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);max-width:650px;margin:0 0 26px;font-weight:500}
+  .section{padding:34px 0 64px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;
+    padding:6px 13px;border-radius:999px;background:var(--lav-soft);color:var(--lav);border:0}
+
+  /* heart difficulty */
+  .meter{display:inline-flex;gap:3px;vertical-align:middle;font-size:16px;line-height:1}
+  .heart{color:var(--pink-soft)}
+  .heart.on{color:var(--pink-deep);text-shadow:0 1px 4px rgba(244,73,154,.35)}
+
+  .badge{font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .badge.play{background:linear-gradient(135deg,#d8fff0,#c6f7e6);color:#138a63}
+  .badge.lock{background:var(--locked-soft);color:#d65f37}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:20px;text-align:left;
+    color:var(--ink);display:flex;flex-direction:column;gap:11px;transition:.18s;min-height:178px;
+    box-shadow:0 10px 26px -18px var(--shadow)}
+  button.card:hover{transform:translateY(-4px) rotate(-.4deg);border-color:var(--pink);box-shadow:0 18px 38px -18px var(--shadow)}
+  .card .cat{font-family:'Fredoka';font-weight:600;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--lav)}
+  .card h3{font-family:'Fredoka';font-weight:600;font-size:19px;margin:0;color:var(--ink)}
+  .card p.prem{color:var(--muted);font-size:14px;margin:0;flex:1;font-weight:500}
+  .card .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px}
+
+  .filters{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:24px;
+    background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 10px 26px -20px var(--shadow)}
+  .filters select,.filters input{background:var(--cream);color:var(--ink);border:2px solid var(--line);
+    border-radius:14px;padding:10px 13px;font-family:'Quicksand';font-weight:600;font-size:14px}
+  .filters input{flex:1;min-width:170px}
+  .filters input::placeholder{color:var(--muted2)}
+  .toggle{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--muted);cursor:pointer;user-select:none;font-weight:600}
+  .switch{width:44px;height:24px;border-radius:999px;background:var(--pink-soft);border:0;position:relative;transition:.15s;flex:none}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+  .switch.on{background:linear-gradient(135deg,var(--pink),var(--lav))}
+  .switch.on::after{left:23px}
+  .count{font-family:'Fredoka';font-weight:600;font-size:13px;color:var(--lav);margin-left:auto}
+
+  .packgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}
+  .packrow{display:flex;align-items:center;gap:13px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:13px 15px;cursor:pointer;transition:.15s}
+  .packrow:hover{border-color:var(--pink);transform:translateY(-2px)}
+  .packrow.on{background:linear-gradient(135deg,#fff,#fff2f9);border-color:var(--pink)}
+  .packrow .nm{font-family:'Fredoka';font-weight:600;font-size:15px}
+  .packrow .ty{font-size:11px;color:var(--muted2);font-weight:600}
+
+  .hero{padding:58px 0 26px}
+  .big-btn{display:inline-flex;align-items:center;gap:10px;border:0;color:#fff;font-family:'Fredoka';font-weight:700;font-size:19px;
+    padding:16px 32px;border-radius:999px;transition:.18s;background:linear-gradient(135deg,var(--pink),var(--lav));
+    box-shadow:0 14px 34px -12px var(--shadow)}
+  .big-btn:hover{transform:translateY(-3px) scale(1.02)}
+  .big-btn:active{transform:translateY(0)}
+  .ghost-btn{background:#fff;color:var(--pink-deep);border:2px solid var(--line);font-weight:700;font-family:'Fredoka';
+    padding:14px 24px;border-radius:999px;font-size:16px;transition:.15s}
+  .ghost-btn:hover{border-color:var(--pink);transform:translateY(-2px)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:8px 0 0;align-items:center}
+  .chiplabel{font-family:'Fredoka';font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted2);margin-right:4px}
+  .chip{background:#fff;border:2px solid var(--line);color:var(--muted);font-weight:600;font-size:13.5px;padding:8px 15px;border-radius:999px;transition:.14s}
+  .chip:hover{color:var(--pink-deep);border-color:var(--pink-soft)}
+  .chip.on{background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;border-color:transparent}
+
+  .result{margin-top:30px;background:linear-gradient(135deg,#fff5fb,#f3ecff);border:2px solid var(--pink);
+    border-radius:28px;padding:30px;animation:pop .4s cubic-bezier(.2,.9,.3,1.3);box-shadow:0 20px 50px -22px var(--shadow)}
+  @keyframes pop{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+
+  .back{background:none;border:0;color:var(--muted);font-size:14px;font-weight:700;padding:6px 0;margin-bottom:6px}
+  .back:hover{color:var(--pink-deep)}
+  .statblock{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+  .stat{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:15px 17px}
+  .stat .k{font-family:'Fredoka';font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--lav);margin-bottom:6px}
+  .stat .v{font-size:15px;font-weight:700;color:var(--ink)}
+  .block{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:22px 24px;margin:16px 0;box-shadow:0 10px 26px -20px var(--shadow)}
+  .block h4{font-family:'Fredoka';font-weight:700;font-size:16px;margin:0 0 12px;color:var(--pink-deep)}
+  .block ul{margin:0;padding-left:20px}.block li{margin:8px 0}
+  .setup-line{display:flex;gap:12px;padding:8px 0;border-bottom:2px solid var(--line)}
+  .setup-line:last-child{border:0}
+  .setup-line .k{font-family:'Fredoka';font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--lav);width:92px;flex:none}
+  .packtag{display:inline-flex;align-items:center;gap:6px;background:var(--cream);border:2px solid var(--line);border-radius:12px;padding:6px 12px;font-size:13px;font-weight:600;margin:3px 6px 3px 0}
+  .packtag.owned{border-color:#bdf3df;color:#138a63;background:#eafff7}
+  .packtag.missing{border-color:var(--locked-soft);color:#d65f37;background:#fff3ee}
+  .mile{display:flex;align-items:flex-start;gap:12px;padding:10px 0;cursor:pointer;border-bottom:2px solid var(--line)}
+  .mile:last-child{border:0}
+  .box{width:24px;height:24px;border-radius:9px;border:2px solid var(--line);flex:none;margin-top:1px;display:grid;place-items:center;transition:.14s;background:#fff}
+  .box.checked{background:linear-gradient(135deg,var(--pink),var(--lav));border-color:transparent}
+  .mile.done .lbl{color:var(--muted2);text-decoration:line-through}
+  .mile .lbl{font-weight:600}
+  .credit{font-size:13px;color:var(--muted2);margin-top:18px;font-weight:600}
+  .empty{background:var(--card);border:2px dashed var(--pink-soft);border-radius:22px;padding:34px;text-align:center;color:var(--muted);font-weight:600}
+  footer{padding:30px 0 44px;color:var(--muted2);font-size:13px;text-align:center;font-weight:600}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="topbar">
+  <button class="brand" onclick="go('home')" aria-label="Home">
+    <svg class="mark" width="22" height="26" viewBox="0 0 22 26"><path d="M11 0L22 13L11 26L0 13Z" fill="#3ed27e"/><path d="M11 4.5L17.5 13L11 21.5L4.5 13Z" fill="#eafff5"/><path d="M11 8L14 13L11 18L8 13Z" fill="#3ed27e"/></svg>
+    Sir Plumbob <span style="font-size:15px">💖</span>
+  </button>
+  <nav class="main" id="nav">
+    <button data-v="browse" onclick="go('browse')">Browse</button>
+    <button data-v="surprise" onclick="go('surprise')">Surprise Me</button>
+    <button data-v="packs" onclick="go('packs')">My Packs</button>
+  </nav>
+</div></div></header>
+
+<main id="app" class="wrap"></main>
+
+<footer><div class="wrap">
+  Sir Plumbob Challenges — interactive prototype 🎀 · <span id="ownedCount"></span> packs owned · selections reset on refresh
+</div></footer>
+
+<script>
+/* ---------------- PACKS ---------------- */
+const PACKS = [
+  {id:'base', name:'Base Game', type:'Base'},
+  {id:'gtw', name:'Get to Work', type:'Expansion'},
+  {id:'gt', name:'Get Together', type:'Expansion'},
+  {id:'cl', name:'City Living', type:'Expansion'},
+  {id:'sea', name:'Seasons', type:'Expansion'},
+  {id:'gf', name:'Get Famous', type:'Expansion'},
+  {id:'il', name:'Island Living', type:'Expansion'},
+  {id:'eco', name:'Eco Lifestyle', type:'Expansion'},
+  {id:'cot', name:'Cottage Living', type:'Expansion'},
+  {id:'royal', name:'Royalty & Legacy', type:'Expansion'},
+  {id:'vamp', name:'Vampires', type:'Game Pack'},
+  {id:'rom', name:'Realm of Magic', type:'Game Pack'},
+  {id:'wolf', name:'Werewolves', type:'Game Pack'},
+  {id:'dine', name:'Dine Out', type:'Game Pack'},
+  {id:'parent', name:'Parenthood', type:'Game Pack'},
+  {id:'out', name:'Outdoor Retreat', type:'Game Pack'},
+  {id:'tiny', name:'Tiny Living', type:'Stuff Pack'},
+];
+const packName = id => (PACKS.find(p=>p.id===id)||{name:id}).name;
+
+/* ---------------- CHALLENGES ---------------- */
+const CH = [
+  {id:'rags', title:'Rags to Riches', cat:'Wealth & Progression', type:'Rags to Riches', diff:3, length:'Multi-session', best:'From-nothing players',
+   prem:'An empty lot, an empty wallet, and nothing but grit.',
+   goal:'Build a fully-furnished, debt-free life starting from §0 with no outside income.',
+   req:['base'], rec:['sea','eco'],
+   setup:[['Lot','Empty 64×64'],['Funds','§0'],['Aging','On, normal']],
+   gen:['No money cheats after setup','Income only from skills your Sim builds'],
+   spec:['Start on a cleared lot with §0','Earn only via fishing, gardening, collecting or crafts'],
+   mile:['First §1,000','A real roof overhead','§50,000 banked','A money skill maxed','Fully furnished & debt-free'],
+   harder:['Stay fully off-the-grid the whole way','Never take a rabbit-hole job'],
+   credit:'Community classic.'},
+
+  {id:'legacy', title:'The Legacy Challenge', cat:'Family & Generational', type:'Legacy', diff:4, length:'10 generations', best:'Long-haul dynasty players',
+   prem:'One founder, a bare lot, and ten generations of family on the very same spot.',
+   goal:'Take a single bloodline through ten unbroken generations on the founder\u2019s original lot.',
+   req:['base'], rec:['parent','sea','cot'],
+   setup:[['Lot','Largest empty (50×50)'],['Funds','Starting only'],['Aging','On, normal']],
+   gen:['No money cheats after setup','The family never moves lots','One named heir per generation'],
+   spec:['Pick succession laws (Gender / Bloodline / Heir) up front','Only the heir\u2019s children continue the line','Survive ten full generations'],
+   mile:['Found the dynasty','Produce a Gen 2 heir','Reach Generation 5','Reach Generation 8','Crown the Gen 10 heir'],
+   harder:['Use the strictest succession laws and never break them','Combine with a §0 founder'],
+   credit:'Created by Pinstar.'},
+
+  {id:'100baby', title:'100 Baby Challenge', cat:'Family & Generational', type:'Endurance', diff:5, length:'Open-ended', best:'Marathon lovers',
+   prem:'One mother. One hundred children. As few matriarchs as humanly possible.',
+   goal:'Give birth to 100 children using as few matriarchs as you can.',
+   req:['base'], rec:['gtw','cl','parent'],
+   setup:[['Lot','Any affordable home'],['Funds','Starting only'],['Aging','On; NPC aging on']],
+   gen:['No money cheats','Raise every child properly — no neglect'],
+   spec:['One donor per child — never reuse a father','Matriarch works only a work-from-home job','No nanny or babysitter, ever','Max seven kids in the household at once'],
+   mile:['Survive the first toddlers','Reach baby #25','Pass to a second matriarch','Reach baby #50','Welcome baby #100'],
+   harder:['Single-matriarch run','No maids or hired help at all'],
+   credit:'Official ruleset by Snarky Sims.'},
+
+  {id:'nsb', title:'Not So Berry', cat:'Family & Generational', type:'Themed Legacy', diff:3, length:'10 generations', best:'Variety-seeking legacy fans',
+   prem:'A rainbow legacy — ten generations, each a colour with a wildly specific life.',
+   goal:'Complete ten generations, each heir fulfilling their colour\u2019s career, aspiration and rules.',
+   req:['gtw','gt','cl','parent'], rec:['sea'],
+   setup:[['Lot','Your choice'],['Funds','Default'],['Aging','On, normal (required)']],
+   gen:['Play at normal lifespan','Each heir expresses their colour','Complete each generation\u2019s career & aspiration'],
+   spec:['Gen 1 Mint: Scientist + Chief of Mischief','Gen 2 Rose: Politician + Serial Romantic','...through to Gen 10 Blue: Critic + Super Parent'],
+   mile:['Finish Mint','Reach Yellow (Gen 3)','Reach Plum (Gen 5)','Reach Peach (Gen 8)','Complete Blue (Gen 10)'],
+   harder:['Complete every aspiration with no reward-trait shortcuts','Run it as true berry Sims'],
+   credit:'Created by lilsimsie & alwaysimming.'},
+
+  {id:'crown', title:'The Crowned Dynasty', cat:'Family & Generational', type:'Royalty', diff:5, length:'Multi-generation', best:'Pageantry & intrigue fans',
+   prem:'A crown is easy to win and brutally hard to keep.',
+   goal:'Rise to the highest royal rank, then hold the crown across three generations.',
+   req:['royal'], rec:['parent','gf'],
+   setup:[['Lot','A grand estate'],['Funds','§5,000'],['Aging','On, normal']],
+   gen:['Build standing only through legitimate noble duties','One heir carries the crown'],
+   spec:['Each heir must earn their rank','Scandals carry real consequences','Stay crowned three full generations'],
+   mile:['Claim a noble title','Issue your first decree','Reach the upper ranks','Crown a 2nd-gen heir','Reign three generations'],
+   harder:['Refuse all alliances with a rival house','Hold the crown five generations'],
+   credit:'Original — Plumbob.'},
+
+  {id:'apoc', title:'The Apocalypse Challenge', cat:'Survival & Hardship', type:'Legacy', diff:5, length:'Multi-generation', best:'Hardest-puzzle players',
+   prem:'Life buried under restrictions — lifted one maxed career at a time.',
+   goal:'Lift every apocalypse restriction; each is tied to a career you must max to level 10.',
+   req:['base'], rec:['gtw','cl','eco'],
+   setup:[['Lot','Empty (never move)'],['Funds','Default'],['Aging','On, normal']],
+   gen:['Start under all restrictions at once','A restriction lifts when a Sim maxes its career','Each Sim may lift only one restriction in their life'],
+   spec:['Culinary → only the cheapest grill until maxed','Retail → buy objects only on Sundays','Athlete → no smoke detectors; homebound non-athletes'],
+   mile:['First restriction lifted','A quarter lifted','Half lifted','Three-quarters lifted','All restrictions lifted'],
+   harder:['Stay off-grid until Civic Planner is maxed','Forbid pre-skilled founders'],
+   credit:'By Pinstar, maintained by poopsiesims.'},
+
+  {id:'homestead', title:'Off-Grid Homestead', cat:'Survival & Hardship', type:'Self-Sufficiency', diff:4, length:'Two in-game years', best:'Homesteaders',
+   prem:'No power lines, no water mains, no grocery deliveries — just the land and the seasons.',
+   goal:'Survive two in-game years fully off the grid, every calorie grown, foraged or raised.',
+   req:['sea','cot'], rec:['eco','out'],
+   setup:[['Lot','Rural, Off-the-Grid trait'],['Funds','§1,500'],['Aging','On, long']],
+   gen:['No money cheats','Lot stays Off-the-Grid','Never buy food'],
+   spec:['Power from solar/candles; water from dew & rain','Income only from your own produce & animals','Plan for winter — nothing grows outdoors'],
+   mile:['First crops planted','Survive a winter on stored food','A self-sufficient harvest cycle','Complete year one','Complete year two'],
+   harder:['Closed loop — nothing bought from off the lot, ever','Extend to a full decade'],
+   credit:'Built around the Off-the-Grid lot trait.'},
+
+  {id:'lastwinter', title:'The Last Winter', cat:'Survival & Hardship', type:'Survival', diff:3, length:'Autumn → spring', best:'Prep & planning players',
+   prem:'Once the first snow falls, the shops are closed to you. Stockpile or starve.',
+   goal:'Enter winter with enough stored food and fuel to survive it without buying anything.',
+   req:['sea'], rec:['cot','eco'],
+   setup:[['Lot','A cabin'],['Funds','§2,000'],['Aging','On, normal']],
+   gen:['Spend autumn growing & preserving','From winter\u2019s first day, live only on stores','Heat & light from prepared resources'],
+   spec:['No deliveries or shopping after winter begins','The pantry & woodpile must last to spring','Survive to the first day of spring'],
+   mile:['First preserves stored','A full pantry by autumn\u2019s end','Survive the first cold snap','Reach midwinter','Survive to spring'],
+   harder:['Double-length winter','Go fully off-grid'],
+   credit:'Built around the Seasons weather system.'},
+
+  {id:'stranded', title:'Stranded', cat:'Survival & Hardship', type:'Survival', diff:3, length:'Multi-session', best:'Foraging fans',
+   prem:'A tent, a backpack, and a forest that doesn\u2019t care whether you live.',
+   goal:'Survive an extended stay in Granite Falls, living entirely off the land.',
+   req:['out'], rec:['sea'],
+   setup:[['Lot','Tent campsite, Granite Falls'],['Funds','§200'],['Aging','On, normal']],
+   gen:['Live in the wilderness','No trips back to town for supplies','Treat illness with nature'],
+   spec:['Food only from foraging, fishing & campfire cooking','Build Herbalism for the forest\u2019s illnesses','Upgrade tent → cabin only with gathered means'],
+   mile:['First foraged meal','A reliable water & food source','Survive a storm or illness','Build a real shelter','Complete the extended stay'],
+   harder:['No tent — only shelters you build on site','Stay a full in-game year'],
+   credit:'Built around Outdoor Retreat.'},
+
+  {id:'blackwidow', title:'Black Widow', cat:'Villain & Dark Roleplay', type:'Roleplay', diff:4, length:'Multi-session', best:'Storytelling villains',
+   prem:'She marries for money, mourns for a moment, and moves straight to the next suitor.',
+   goal:'Marry and outlive ten spouses, inheriting each fortune, never working a day.',
+   req:['base'], rec:['gf','gtw'],
+   setup:[['Lot','A cheap starter (it must grow)'],['Funds','Default'],['Aging','On widow, off others']],
+   gen:['No job — all money from spouses','No money cheats','No repairs — replace with Simoleons'],
+   spec:['Only marry single Sims','Host a silver-rated dinner party each marriage','The home grows in value with each spouse','Outlive ten spouses'],
+   mile:['First spouse married','First silver dinner party','First inheritance','Outlive five spouses','Outlive spouse #10'],
+   harder:['Legendary mode — all ten before becoming an Elder','Three spouses must be Jealous'],
+   credit:'Created by Simalot (lotlot80).'},
+
+  {id:'tyrant', title:'Town Tyrant', cat:'Villain & Dark Roleplay', type:'Roleplay', diff:3, length:'Multi-session', best:'Civic schemers',
+   prem:'Your Sim has decided the town should be run their way — and proceeds to make it so.',
+   goal:'Force your chosen Neighborhood Action Plans onto every neighbourhood you can reach.',
+   req:['eco'], rec:['cl','gf'],
+   setup:[['Lot','An Eco Lifestyle neighbourhood'],['Funds','§2,000'],['Aging','On, normal']],
+   gen:['Power flows through the N.A.P. voting system','Earn & spend Influence on policies','Bend each neighbourhood to your will'],
+   spec:['Enact your chosen policies everywhere you live','Repeal the policies locals actually want','Hold your rule against opposition'],
+   mile:['Earn your first Influence','Enact your first policy','Repeal a popular plan','Rule a second neighbourhood','Region-wide control'],
+   harder:['Impose one unpopular policy everywhere for a season each','Hold power with a terrible reputation'],
+   credit:'Built around Eco Lifestyle\u2019s N.A.P.s.'},
+
+  {id:'reluctant', title:'The Reluctant Vampire', cat:'Occult & Supernatural', type:'Roleplay', diff:4, length:'Single lifetime', best:'Restraint-based players',
+   prem:'Cursed with the hunger but unwilling to be a monster.',
+   goal:'Reach Grand Master vampire rank without ever feeding on a Sim.',
+   req:['vamp'], rec:['sea','cot'],
+   setup:[['Lot','A quiet manor'],['Funds','Default'],['Aging','Off (vampire)']],
+   gen:['Thirst sated only by plasma packs & fruit','Resist the hunger even at low needs','Reach Grand Master rank'],
+   spec:['Never feed on a Sim — willing or not','No mods/cheats that remove Thirst','Sustain the whole life with no victim'],
+   mile:['A week without feeding on a Sim','Reach Master Vampire','Survive a Thirst crisis','A self-sufficient plasma-fruit supply','Reach Grand Master'],
+   harder:['Grow all your own plasma fruit','Never use a combat/feeding power'],
+   credit:'Built around the Vampires rank system.'},
+
+  {id:'packleader', title:'Full-Moon Pack Leader', cat:'Occult & Supernatural', type:'Occult', diff:3, length:'Single lifetime', best:'Powers-and-progression fans',
+   prem:'The change came, and with it the Fury.',
+   goal:'Reach Apex werewolf rank, grow a loyal pack, and settle the Moonwood feud.',
+   req:['wolf'], rec:['sea','cot'],
+   setup:[['Lot','A den near Moonwood Mill'],['Funds','Default'],['Aging','On, normal']],
+   gen:['Rank up the intended way: Pup → Runt → Prime → Veteran → Apex','No cheats to skip ranks','Live as a werewolf'],
+   spec:['Master your temperaments — no public Rampage three times','Recruit at least four loyal pack members','Resolve the Collective vs Wildfangs feud'],
+   mile:['Survive your first transformation','Reach Prime rank','Recruit your first pack member','Lead a pack of four','Reach Apex'],
+   harder:['Reach Apex entirely alone','Never allow a single public rampage'],
+   credit:'Built around the Werewolves rank & Fury systems.'},
+
+  {id:'coven', title:'The Coven Rises', cat:'Occult & Supernatural', type:'Occult', diff:4, length:'Multi-session', best:'Magic households',
+   prem:'A whole household of spellcasters is a force — if it doesn\u2019t overload first.',
+   goal:'Raise a household of four spellcasters, every one reaching Virtuoso rank.',
+   req:['rom'], rec:['parent'],
+   setup:[['Lot','A magical home'],['Funds','§3,000'],['Aging','On, long']],
+   gen:['Life revolves around magic','XP earned legitimately — casting, potions, duels','All reach Neophyte → ... → Virtuoso'],
+   spec:['Manage each spellcaster\u2019s Charge — no fatal Overload','Learn spells from Sages, duels or tomes','At least four Virtuosos by the end'],
+   mile:['Found the coven','First member to Adept','A full coven of four','Two Virtuosos','The whole coven reaches Virtuoso'],
+   harder:['No bloodline shortcuts','Each masters a different magic school first'],
+   credit:'Built around the Realm of Magic rank system.'},
+
+  {id:'mermaid', title:'Mermaid\u2019s Reef', cat:'Occult & Supernatural', type:'Self-Sufficiency', diff:3, length:'Single lifetime', best:'Idyllic-occult players',
+   prem:'The land has nothing your Sim wants. Their life is the tide.',
+   goal:'Support a mermaid for a full lifetime on Sulani, all income from the sea.',
+   req:['il'], rec:['sea'],
+   setup:[['Lot','A beach lot on Sulani'],['Funds','§1,500'],['Aging','On, normal']],
+   gen:['Income only from the sea','No land-based salaried career','Manage Hydration to stay healthy'],
+   spec:['Live in harmony with Sulani','Use mermaid abilities as part of life','Sustain a full lifetime this way'],
+   mile:['First income from the sea','Befriend the dolphins','§10,000 banked','Restore Sulani\u2019s waters','A full life by the sea'],
+   harder:['Go fully off-grid on the beach','Never set foot off Sulani'],
+   credit:'Built around Island Living.'},
+
+  {id:'jack', title:'Jack of All Trades', cat:'Career & Skill', type:'Completionist', diff:5, length:'Open-ended', best:'The longest grind',
+   prem:'Astronaut by Monday, painter by Thursday, secret agent by the weekend.',
+   goal:'Reach the top of every career you own with a single Sim.',
+   req:['base'], rec:['gtw','cl','gf'],
+   setup:[['Lot','A skill-equipped home'],['Funds','Default'],['Aging','On, long']],
+   gen:['One Sim tops every career','No career cheats','One job at a time'],
+   spec:['Reach level 10 of each career','Earned Potions of Youth allowed; aging-off cheat not','Track which careers are done'],
+   mile:['First career topped','Five careers topped','Half of all careers','A branching career completed','Every career conquered'],
+   harder:['Do it in a single normal lifespan','Complete both branches of every career'],
+   credit:'Community completionist format.'},
+
+  {id:'intern', title:'From Intern to Icon', cat:'Career & Skill', type:'Fame', diff:3, length:'Single lifetime', best:'Rags-to-stardom fans',
+   prem:'Nobody knows your Sim\u2019s name. Not yet.',
+   goal:'Rise from an unknown, broke Sim to a five-star celebrity.',
+   req:['gf'], rec:['cl','gt'],
+   setup:[['Lot','A cheap city flat'],['Funds','§0'],['Aging','On, normal']],
+   gen:['Start with no money and no fame','Fame earned through performance & skill','Reach the top celebrity level'],
+   spec:['Build fame from zero stars to five','Manage reputation & public image','Sustain stardom, not just reach it'],
+   mile:['First moment of recognition','Two-star celebrity','A signature hit or role','Four-star celebrity','Five-star icon'],
+   harder:['Reach five stars with a flawless reputation','Fame through a creative skill, no Actor career'],
+   credit:'Built around the Get Famous fame system.'},
+
+  {id:'doctor', title:'Doctor\u2019s Orders', cat:'Career & Skill', type:'Roleplay', diff:3, length:'Single career arc', best:'Active-career fans',
+   prem:'Scrubs on, no shortcuts. Every shift played live.',
+   goal:'Reach the top of the Doctor career, playing every shift actively.',
+   req:['gtw'], rec:['parent'],
+   setup:[['Lot','A home near a hospital'],['Funds','§2,000'],['Aging','On, normal']],
+   gen:['Every workday is an active shift','No career cheats','Reach the top honestly'],
+   spec:['Diagnose & treat patients yourself each shift','Build Logic for accurate diagnoses','Climb from intern to the top'],
+   mile:['First shift survived','A correct-diagnosis streak','Deliver a baby','Crack a tricky illness','Top of the hospital'],
+   harder:['No misdiagnosis for a whole month','Reach the top with no degree'],
+   credit:'Built around the Get to Work Doctor career.'},
+
+  {id:'chef', title:'Five-Star Chef', cat:'Career & Skill', type:'Career', diff:4, length:'Multi-session', best:'Cooking + business fans',
+   prem:'It starts with burnt eggs. It ends with a five-star restaurant.',
+   goal:'Go from novice cook to owning a five-star restaurant.',
+   req:['dine'], rec:['gtw'],
+   setup:[['Lot','Home kitchen → restaurant'],['Funds','§5,000'],['Aging','On, normal']],
+   gen:['Cooking mastery first, business second','No cheats for skills or ratings','Reach & sustain five stars'],
+   spec:['Build Cooking & Gourmet Cooking high before opening','Own and actively run a restaurant','Climb to a five-star rating'],
+   mile:['Cooking skill maxed','Restaurant opened','First three-star rating','First profitable month','A five-star restaurant'],
+   harder:['Build a chain of two five-star restaurants','Reach five stars without cooking yourself'],
+   credit:'Built around the Dine Out restaurant system.'},
+
+  {id:'20k', title:'The §20k Challenge', cat:'Build & Create-a-Sim', type:'Build', diff:3, length:'One build session', best:'Budget builders',
+   prem:'A whole family home for the price of a modest car.',
+   goal:'Build a complete, fully livable family home for under §20,000 total.',
+   req:['base'], rec:[],
+   setup:[['Lot','A medium empty lot'],['Funds','§20,000 cap'],['Aging','Any']],
+   gen:['Final lot value stays under §20,000','No money cheats after the set','Genuinely livable for a family'],
+   spec:['Include a full kitchen, bathroom, four beds & a living space','Every Sim\u2019s needs satisfiable','bb.moveobjects fine; budget-bypass cheats not'],
+   mile:['Footprint planned','Walls, roof & floors done','Kitchen & bath functional','All four needs covered','Final value under §20,000'],
+   harder:['Drop the cap to §12,000','House a family of six'],
+   credit:'Community budget-build format.'},
+
+  {id:'tiny', title:'Tiny Living Test', cat:'Build & Create-a-Sim', type:'Build', diff:4, length:'Multi-session', best:'Spatial-puzzle builders',
+   prem:'Four people. One impossibly small house.',
+   goal:'House a happy family of four in a Tiny home with the Tiny Home lot trait.',
+   req:['tiny'], rec:['parent','cot'],
+   setup:[['Lot','Small lot, Tiny Home trait, ≤64 tiles'],['Funds','§30,000'],['Aging','On, normal']],
+   gen:['Stay within the Tiny tier','Keep the Tiny Home trait active','All four stay genuinely happy'],
+   spec:['Fit beds, kitchen, bath & living for four in the tile limit','No expanding past the threshold','Use space-saving objects'],
+   mile:['Footprint within Tiny tier','Sleeping for four solved','Kitchen & bath fitted','Tiny Home buffs active','Four happy Sims long-term'],
+   harder:['Drop to the Micro tier (≤32 tiles)','Add a fifth family member'],
+   credit:'Built around the Tiny Living tiers.'},
+
+  {id:'million', title:'Speedrun to a Million', cat:'Bite-Sized & Competitive', type:'Competitive', diff:4, length:'Measured in Sim-days', best:'Optimisers',
+   prem:'Net worth: zero. Target: one million. Clock: running.',
+   goal:'Reach §1,000,000 household worth as fast as possible, no cheats.',
+   req:['base'], rec:['gtw','dine'],
+   setup:[['Lot','A cheap starter'],['Funds','Default'],['Aging','On, normal']],
+   gen:['No money cheats','Time counted in Sim-days','Reach §1,000,000 total worth'],
+   spec:['Any legitimate income path allowed','Track your Sim-day count','Beat your previous best on later runs'],
+   mile:['First §10,000','§100,000','§500,000','§750,000','§1,000,000'],
+   harder:['Reach the million from a §0 start','Forbid all careers'],
+   credit:'Wealth-speedrun format.'},
+
+  {id:'24hr', title:'The 24-Hour Challenge', cat:'Bite-Sized & Competitive', type:'Bite-Sized', diff:2, length:'One in-game day', best:'Quick-goal players',
+   prem:'One Sim, one day, one goal.',
+   goal:'Accomplish one clearly-defined goal within a single in-game day.',
+   req:['base'], rec:[],
+   setup:[['Lot','Any home'],['Funds','As the goal needs'],['Aging','Any']],
+   gen:['Goal done within the 24-hour window','No cheats toward the goal','Unfinished by midnight = fail'],
+   spec:['Define the goal precisely (a number, not a vibe)','Manage needs and the goal in one day','Stop at midnight — no overtime'],
+   mile:['Goal chosen','Halfway by midday','On pace by evening','Final push before midnight','Goal met in time'],
+   harder:['Stack two goals into one day','Start at 6pm so half your window is night'],
+   credit:'One-day challenge format.'},
+
+  {id:'soap', title:'Soap Opera', cat:'Themed & Narrative', type:'Roleplay', diff:2, length:'Multi-session', best:'Drama lovers',
+   prem:'Affairs, betrayals, secret children, dramatic returns. You\u2019re the showrunner.',
+   goal:'Engineer maximum drama, romance and feuding across one tangled friend group.',
+   req:['base'], rec:['gt','gf','cl'],
+   setup:[['Lot','A shared block'],['Funds','§5,000'],['Aging','On, normal']],
+   gen:['Drama is the objective','Every storyline tangles the cast further','Keep the saga going'],
+   spec:['Maintain overlapping romances & rivalries','Stage recurring "episodes"','No one stays stable for long'],
+   mile:['Cast established','First scandal','A love triangle in full swing','A shocking reveal','A finale-worthy blowup'],
+   harder:['Everyone has an active secret at all times','Run it across generations'],
+   credit:'Drama-driven storytelling format.'},
+];
+
+const CATS = ['Wealth & Progression','Family & Generational','Occult & Supernatural','Survival & Hardship','Villain & Dark Roleplay','Build & Create-a-Sim','Career & Skill','Themed & Narrative','Bite-Sized & Competitive','Pack-Driven'];
+const DIFF_NAME = {1:'Casual',2:'Moderate',3:'Hard',4:'Brutal',5:'Extreme'};
+
+/* ---------------- STATE ---------------- */
+const state = {
+  view:'home',
+  owned:new Set(['base','sea','parent','gtw']),
+  filters:{cat:'',diff:'',length:'',q:'',playable:false},
+  surprise:{diff:'',length:'',cat:'',result:null},
+  current:null,
+  done:{},
+};
+
+const isPlayable = c => c.req.every(p => state.owned.has(p));
+const missingPacks = c => c.req.filter(p => !state.owned.has(p));
+
+/* ---------------- HELPERS ---------------- */
+function meter(d){let s='<span class="meter" aria-label="'+d+' of 5 difficulty">';for(let i=1;i<=5;i++)s+='<span class="heart'+(i<=d?' on':'')+'">'+(i<=d?'\u2665':'\u2661')+'</span>';return s+'</span>';}
+function badge(c){return isPlayable(c)?'<span class="badge play">\u2728 Playable</span>':'<span class="badge lock">\uD83D\uDD12 Locked</span>';}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function setNav(){document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active', b.dataset.v===state.view));
+  document.getElementById('ownedCount').textContent = state.owned.size;}
+
+function go(v){state.view=v;render();window.scrollTo({top:0,behavior:'instant'});}
+function open(id){state.current=id;state.view='detail';render();window.scrollTo({top:0});}
+
+/* ---------------- RENDER ---------------- */
+function render(){
+  setNav();
+  const app=document.getElementById('app');
+  if(state.view==='home') app.innerHTML=viewHome();
+  else if(state.view==='browse') app.innerHTML=viewBrowse();
+  else if(state.view==='surprise') app.innerHTML=viewSurprise();
+  else if(state.view==='packs') app.innerHTML=viewPacks();
+  else if(state.view==='detail') app.innerHTML=viewDetail();
+}
+
+function cardHTML(c){
+  return '<button class="card" onclick="open(\''+c.id+'\')">'
+    +'<span class="cat">'+esc(c.cat)+'</span>'
+    +'<h3>'+esc(c.title)+'</h3>'
+    +'<p class="prem">'+esc(c.prem)+'</p>'
+    +'<div class="row">'+meter(c.diff)+badge(c)+'</div></button>';
+}
+
+function viewHome(){
+  const playable = CH.filter(isPlayable).length;
+  return '<section class="hero">'
+    +'<p class="eyebrow">✨ Sims 4 Challenge Hub</p>'
+    +'<h1 class="page big">Find your next<br><span class="gradtext">challenge.</span></h1>'
+    +'<p class="sub">Filter by the packs you actually own, follow rules written to be sweet and clear, and let Sir Plumbob hand you something to play. '+playable+' of '+CH.length+' challenges are ready for your packs right now! 💕</p>'
+    +'<div style="display:flex;gap:12px;flex-wrap:wrap">'
+      +'<button class="big-btn" onclick="go(\'surprise\')">🎲 Surprise Me</button>'
+      +'<button class="ghost-btn" onclick="go(\'browse\')">Browse all</button>'
+      +'<button class="ghost-btn" onclick="go(\'packs\')">Set my packs</button>'
+    +'</div></section>'
+    +'<section class="section"><p class="eyebrow">💗 A taste of the library</p><div class="grid">'
+      + CH.slice(0,6).map(cardHTML).join('') +'</div></section>';
+}
+
+function viewBrowse(){
+  const f=state.filters;
+  let list=CH.filter(c=>
+    (!f.cat||c.cat===f.cat)&&
+    (!f.diff||c.diff===+f.diff)&&
+    (!f.length||c.length===f.length)&&
+    (!f.q||(c.title+' '+c.prem+' '+c.type).toLowerCase().includes(f.q.toLowerCase()))&&
+    (!f.playable||isPlayable(c))
+  );
+  const lengths=[...new Set(CH.map(c=>c.length))];
+  return '<section class="section">'
+    +'<p class="eyebrow">💖 Browse</p><h1 class="page">The library</h1>'
+    +'<p class="sub">Locked challenges stay visible — you\u2019ll always see the cute stuff a pack would unlock.</p>'
+    +'<div class="filters">'
+      +'<input id="q" placeholder="Search challenges…" value="'+esc(f.q)+'" oninput="state.filters.q=this.value;render();focusBack(\'q\')">'
+      +'<select onchange="state.filters.cat=this.value;render()"><option value="">All categories</option>'+CATS.map(c=>'<option'+(f.cat===c?' selected':'')+'>'+c+'</option>').join('')+'</select>'
+      +'<select onchange="state.filters.diff=this.value;render()"><option value="">Any difficulty</option>'+[1,2,3,4,5].map(d=>'<option value="'+d+'"'+(f.diff==d?' selected':'')+'>'+d+' — '+DIFF_NAME[d]+'</option>').join('')+'</select>'
+      +'<select onchange="state.filters.length=this.value;render()"><option value="">Any length</option>'+lengths.map(l=>'<option'+(f.length===l?' selected':'')+'>'+l+'</option>').join('')+'</select>'
+      +'<label class="toggle" onclick="state.filters.playable=!state.filters.playable;render()"><span class="switch'+(f.playable?' on':'')+'"></span>Playable only</label>'
+      +'<span class="count">'+list.length+' shown 🎀</span>'
+    +'</div>'
+    + (list.length? '<div class="grid">'+list.map(cardHTML).join('')+'</div>'
+        : '<div class="empty">No challenges match those filters yet. Try loosening them, or turn off “Playable only”. 💝</div>')
+    +'</section>';
+}
+
+function focusBack(id){const e=document.getElementById(id);if(e){e.focus();const v=e.value;e.value='';e.value=v;}}
+
+function viewSurprise(){
+  const s=state.surprise;
+  const diffChips=['',1,2,3,4,5].map(d=>'<button class="chip'+(s.diff==d?' on':'')+'" onclick="state.surprise.diff=\''+d+'\';render()">'+(d===''?'Any':d+' '+DIFF_NAME[d])+'</button>').join('');
+  const catChips=(['']).concat(CATS).map(c=>'<button class="chip'+(s.cat===c?' on':'')+'" onclick="state.surprise.cat=\''+c.replace(/'/g,"\\'")+'\';render()">'+(c===''?'Any category':c.split(' ')[0])+'</button>').join('');
+  let resultHTML='';
+  if(s.result==='none'){
+    resultHTML='<div class="empty">No <b>playable</b> challenge matches those filters yet. Loosen them, or grab more packs over on <a onclick="go(\'packs\')" style="color:var(--pink-deep);cursor:pointer;font-weight:700">My Packs</a>. 💖</div>';
+  } else if(s.result){
+    const c=CH.find(x=>x.id===s.result);
+    resultHTML='<div class="result">'
+      +'<span style="font-family:Fredoka;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--lav)">'+esc(c.cat)+'</span>'
+      +'<h2 style="font-family:Fredoka;font-weight:700;font-size:28px;margin:6px 0 8px;color:var(--ink)">'+esc(c.title)+'</h2>'
+      +'<p style="color:var(--muted);margin:0 0 14px;max-width:560px;font-weight:500">'+esc(c.prem)+'</p>'
+      +'<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px">'+meter(c.diff)+'<span class="pill">'+esc(c.length)+'</span>'+badge(c)+'</div>'
+      +'<div style="display:flex;gap:10px;flex-wrap:wrap">'
+        +'<button class="big-btn" onclick="open(\''+c.id+'\')">Open full challenge →</button>'
+        +'<button class="ghost-btn" onclick="spin()">🎲 Spin again</button>'
+      +'</div></div>';
+  }
+  return '<section class="section">'
+    +'<p class="eyebrow">🎲 Surprise Me</p><h1 class="page">Hand me something cute to play</h1>'
+    +'<p class="sub">One tap, one random challenge you can actually play right now — it only ever picks ones your packs support. Narrow it first if you like! 💕</p>'
+    +'<div class="chips"><span class="chiplabel">Difficulty</span>'+diffChips+'</div>'
+    +'<div class="chips" style="margin-top:10px"><span class="chiplabel">Category</span>'+catChips+'</div>'
+    +'<div style="margin-top:24px"><button class="big-btn" onclick="spin()">🎲 Surprise Me</button>'
+      + (s.result?' <button class="ghost-btn" onclick="state.surprise.result=null;render()">Clear</button>':'') +'</div>'
+    + resultHTML
+    +'</section>';
+}
+
+function spin(){
+  const s=state.surprise;
+  let pool=CH.filter(isPlayable)
+    .filter(c=>!s.diff||c.diff==+s.diff)
+    .filter(c=>!s.cat||c.cat===s.cat);
+  if(s.result && s.result!=='none' && pool.length>1) pool=pool.filter(c=>c.id!==s.result);
+  if(!pool.length){state.surprise.result='none';render();return;}
+  state.surprise.result = pool[Math.floor(Math.random()*pool.length)].id;
+  render();
+}
+
+function viewPacks(){
+  const groups={};
+  PACKS.forEach(p=>{(groups[p.type]=groups[p.type]||[]).push(p);});
+  let html='<section class="section"><p class="eyebrow">🎀 My Packs</p><h1 class="page">What do you own?</h1>'
+    +'<p class="sub">Toggle the packs you have. Everything else in the app — Browse and Surprise Me — listens to this. (Base Game is always on!)</p>';
+  Object.keys(groups).forEach(t=>{
+    html+='<h4 style="font-family:Fredoka;font-weight:600;font-size:14px;color:var(--lav);margin:24px 0 11px">'+t+'</h4><div class="packgrid">';
+    groups[t].forEach(p=>{
+      const on=state.owned.has(p.id);const base=p.id==='base';
+      html+='<div class="packrow'+(on?' on':'')+'"'+(base?'':' onclick="togglePack(\''+p.id+'\')"')+' role="button" tabindex="0" onkeydown="if(event.key===\'Enter\'&&\''+p.id+'\'!==\'base\')togglePack(\''+p.id+'\')">'
+        +'<span class="switch'+(on?' on':'')+'" style="pointer-events:none"></span>'
+        +'<span style="flex:1"><span class="nm">'+esc(p.name)+'</span><br><span class="ty">'+(base?'Always owned ♡':p.type)+'</span></span></div>';
+    });
+    html+='</div>';
+  });
+  const playable=CH.filter(isPlayable).length;
+  html+='<p class="sub" style="margin-top:24px;color:var(--lav);font-weight:700">With these packs, '+playable+' of '+CH.length+' sample challenges are playable. 💖</p>';
+  return html+'</section>';
+}
+function togglePack(id){if(id==='base')return;if(state.owned.has(id))state.owned.delete(id);else state.owned.add(id);
+  if(state.surprise.result&&state.surprise.result!=='none'){const c=CH.find(x=>x.id===state.surprise.result);if(c&&!isPlayable(c))state.surprise.result=null;}
+  render();}
+
+function viewDetail(){
+  const c=CH.find(x=>x.id===state.current);if(!c)return '';
+  const done=state.done[c.id]||new Set();
+  const reqTags=c.req.map(p=>'<span class="packtag '+(state.owned.has(p)?'owned':'missing')+'">'+(state.owned.has(p)?'✓':'✕')+' '+esc(packName(p))+'</span>').join('');
+  const recTags=c.rec.length?c.rec.map(p=>'<span class="packtag">'+esc(packName(p))+'</span>').join(''):'<span style="color:var(--muted2);font-size:13px;font-weight:600">None</span>';
+  const playLine = isPlayable(c)
+    ? '<span class="badge play">✨ Playable with your packs</span>'
+    : '<span class="badge lock">🔒 Needs: '+missingPacks(c).map(packName).map(esc).join(', ')+'</span>';
+  return '<section class="section">'
+    +'<button class="back" onclick="go(\'browse\')">← Back to browse</button>'
+    +'<p class="eyebrow">'+esc(c.cat)+'</p>'
+    +'<h1 class="page">'+esc(c.title)+'</h1>'
+    +'<p class="sub" style="margin-bottom:14px">'+esc(c.prem)+'</p>'
+    +'<div style="margin-bottom:6px">'+playLine+'</div>'
+    +'<div class="statblock">'
+      +'<div class="stat"><div class="k">Type</div><div class="v">'+esc(c.type)+'</div></div>'
+      +'<div class="stat"><div class="k">Difficulty</div><div class="v">'+DIFF_NAME[c.diff]+' '+meter(c.diff)+'</div></div>'
+      +'<div class="stat"><div class="k">Length</div><div class="v">'+esc(c.length)+'</div></div>'
+      +'<div class="stat"><div class="k">Best for</div><div class="v">'+esc(c.best)+'</div></div>'
+    +'</div>'
+    +'<div class="block"><h4>💝 The goal</h4><p style="margin:0">'+esc(c.goal)+'</p></div>'
+    +'<div class="block"><h4>🎀 Packs required</h4><div>'+reqTags+'</div>'
+      +'<h4 style="margin-top:16px">Packs recommended</h4><div>'+recTags+'</div></div>'
+    +'<div class="block"><h4>🏡 Setup</h4>'+c.setup.map(s=>'<div class="setup-line"><span class="k">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>').join('')+'</div>'
+    +'<div class="block"><h4>📋 General rules</h4><ul>'+c.gen.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul></div>'
+    +'<div class="block"><h4>✨ Specific rules</h4><ul>'+c.spec.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul></div>'
+    +'<div class="block"><h4>💕 Milestones — track your progress</h4>'
+      + c.mile.map((m,i)=>'<div class="mile'+(done.has(i)?' done':'')+'" onclick="toggleMile(\''+c.id+'\','+i+')"><span class="box'+(done.has(i)?' checked':'')+'">'+(done.has(i)?'<svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</span><span class="lbl">'+esc(m)+'</span></div>').join('')
+    +'</div>'
+    +'<div class="block"><h4>🔥 Want it harder?</h4><ul>'+c.harder.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul></div>'
+    +'<p class="credit">'+esc(c.credit)+' · Last tested: Patch 1.108 — Feb 2026</p>'
+    +'</section>';
+}
+function toggleMile(id,i){const set=state.done[id]||(state.done[id]=new Set());if(set.has(i))set.delete(i);else set.add(i);render();}
+
+render();
+</script>
+</body>
+</html>
