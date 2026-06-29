@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import PlumbobLogo from "./PlumbobLogo";
 import { packs } from "@/lib/packs";
 import { useHydrated, useStore } from "@/lib/store";
@@ -14,106 +15,89 @@ const NAV = [
   { href: "/progress", label: "My Challenges" },
 ];
 
+function NavLinks({
+  pathname,
+  packsLabel,
+  packsAria,
+  onNavigate,
+}: {
+  pathname: string;
+  packsLabel: string;
+  packsAria: string;
+  onNavigate?: () => void;
+}) {
+  return (
+    <>
+      {NAV.map((item) => {
+        const active =
+          item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={active ? "page" : undefined}
+            className={`navlink${active ? " active" : ""}`}
+            onClick={onNavigate}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
+      <Link href="/packs" className="pill navpill" aria-label={packsAria} onClick={onNavigate}>
+        <span aria-hidden="true">🎀</span> {packsLabel}
+      </Link>
+    </>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const hydrated = useHydrated();
   const ownedPacks = useStore((s) => s.ownedPacks);
   const packsSet = useStore((s) => s.packsSet);
+  const [open, setOpen] = useState(false);
 
-  // +1 for the always-owned base game once packs are set.
   const ownedCount = packsSet ? ownedPacks.length + 1 : 0;
   const total = packs.length;
+  const set = hydrated && packsSet;
+  const packsLabel = set ? `${ownedCount} of ${total} packs` : "Set your packs";
+  const packsAria = set
+    ? `My packs: ${ownedCount} of ${total} owned`
+    : "Set the packs you own";
+  const navProps = { pathname, packsLabel, packsAria };
 
   return (
-    <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 30,
-        backdropFilter: "blur(10px)",
-        background:
-          "linear-gradient(180deg, rgba(255,242,248,.95), rgba(255,242,248,.72))",
-        borderBottom: "2px solid var(--line)",
-      }}
-    >
+    <header className="site-header">
       <div className="wrap">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 18,
-            minHeight: 68,
-            flexWrap: "wrap",
-          }}
-        >
-          <Link
-            href="/"
-            aria-label="Mrs Plumbob Challenges — home"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 9,
-              fontFamily: "var(--font-fredoka)",
-              fontWeight: 700,
-              fontSize: 20,
-              color: "var(--ink)",
-              textDecoration: "none",
-            }}
-          >
+        <div className="header-bar">
+          <Link href="/" aria-label="Mrs Plumbob Challenges — home" className="brand">
             <PlumbobLogo />
             MrsPlumbobChallenges <span style={{ fontSize: 15 }}>💖</span>
           </Link>
 
-          <nav
-            aria-label="Primary"
-            style={{ display: "flex", gap: 6, marginLeft: "auto", flexWrap: "wrap", alignItems: "center" }}
-          >
-            {NAV.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className="navlink"
-                  style={{
-                    fontFamily: "var(--font-quicksand)",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    padding: "9px 16px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                    transition: ".15s",
-                    color: active ? "#fff" : "var(--muted)",
-                    background: active
-                      ? "linear-gradient(135deg,var(--pink),var(--lav))"
-                      : "transparent",
-                    boxShadow: active ? "0 6px 16px -6px var(--shadow)" : "none",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <Link
-              href="/packs"
-              className="pill"
-              style={{ marginLeft: 6, textDecoration: "none" }}
-              title="Packs you own"
-              aria-label={
-                hydrated && packsSet
-                  ? `My packs: ${ownedCount} of ${total} owned`
-                  : "Set the packs you own"
-              }
-            >
-              <span aria-hidden="true">🎀</span>{" "}
-              {hydrated && packsSet ? `${ownedCount} of ${total}` : `Set your`} packs
-            </Link>
+          <nav className="nav-desktop" aria-label="Primary">
+            <NavLinks {...navProps} />
           </nav>
+
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span className="nav-toggle-bars" data-open={open} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          </button>
         </div>
+
+        <nav id="mobile-nav" className={`nav-mobile${open ? " open" : ""}`} aria-label="Primary">
+          <NavLinks {...navProps} onNavigate={() => setOpen(false)} />
+        </nav>
       </div>
     </header>
   );
